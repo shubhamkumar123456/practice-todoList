@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import Form from './components/Form';
+import ShowData from './components/ShowData';
 
 function App() {
+  const details=[]
+  const [detail, setdetail] = useState(details);
+  const addDetailsHandler=(formdetail)=>{
+    setdetail([formdetail,...detail])
+  }
+  console.log(details)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='app-form'>
+      <Form adddetails={addDetailsHandler}/>
+      </div>
+      <div className='appShowData'>
+      {detail.map((ele)=>{
+        return<ShowData key={Math.random()} alldata={ele}/>
+      })}
+      </div>
+    
+  
+      
     </div>
   );
 }
